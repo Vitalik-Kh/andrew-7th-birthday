@@ -35,11 +35,16 @@ const IntroGate = ({ onComplete }) => {
 
   const handleClick = () => {
     if (clicks >= 9) {
-      // 10th click - destroy all remaining bricks
-      setShowWhiteFlash(true);
+      // 10th click - first complete the progress bar animation
+      setClicks(10);
+
+      // Wait for the car animation to complete (500ms), then show white flash
       setTimeout(() => {
-        onComplete();
-      }, 1000);
+        setShowWhiteFlash(true);
+        setTimeout(() => {
+          onComplete();
+        }, 1000);
+      }, 500);
       return;
     }
 
@@ -185,7 +190,9 @@ const IntroGate = ({ onComplete }) => {
                   style={{
                     width: `${clicks * 10}%`,
                     background:
-                      "linear-gradient(to right, rgb(34, 197, 94) calc(100% - 60px), transparent 100%)",
+                      clicks >= 10
+                        ? "rgb(34, 197, 94)" // Solid green at 100%
+                        : "linear-gradient(to right, rgb(34, 197, 94) calc(100% - 60px), transparent 100%)",
                     boxShadow:
                       "inset 0 2px 8px rgba(255,255,255,0.2), 0 0 20px rgba(34, 197, 94, 0.5)",
                   }}
@@ -205,7 +212,10 @@ const IntroGate = ({ onComplete }) => {
                 >
                   <div
                     className="relative w-full h-full"
-                    style={{ transform: "translateX(-50%)" }}
+                    style={{
+                      transform:
+                        clicks >= 10 ? "translateX(0%)" : "translateX(-50%)",
+                    }}
                   >
                     <img
                       src={`${
@@ -242,16 +252,14 @@ const IntroGate = ({ onComplete }) => {
 
         {/* Click instruction */}
         <motion.p
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-lg md:text-xl font-bold z-20"
-          animate={{ opacity: [0.7, 1, 0.7] }}
-          transition={{ duration: 2, repeat: Infinity }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white text-lg md:text-xl font-bold z-20 text-center"
           style={{
             textShadow: "2px 2px 0 rgba(0,0,0,0.8)",
             WebkitTextStroke: "0.5px black",
             paintOrder: "stroke fill",
           }}
         >
-          👆 Click or press SPACE to break bricks
+          👆 Click or tap to break bricks
         </motion.p>
       </motion.div>
 

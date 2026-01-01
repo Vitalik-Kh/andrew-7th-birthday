@@ -65,7 +65,7 @@ const MapSection = () => {
         </div>
 
         {/* Venue Info */}
-        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-6 border-2 border-white/20">
+        <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 mb-6 border-2 border-white/20 text-center">
           <h4
             className="font-heading text-2xl text-race-blue mb-3"
             style={{
@@ -84,7 +84,7 @@ const MapSection = () => {
           >
             {venue.address}
           </p>
-          <div className="flex items-center gap-2 text-brick-yellow font-bold">
+          <div className="flex items-center justify-center gap-2 text-brick-yellow font-bold">
             <svg
               className="w-5 h-5"
               fill="none"
