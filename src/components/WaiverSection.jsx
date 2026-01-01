@@ -60,7 +60,7 @@ const WaiverSection = () => {
             <span className="font-bold text-brick-yellow text-xl">
               Ninja Warrior UK waiver
             </span>
-            . It's quick, easy, and required by the venue for everyone's safety.
+            . It's quick and easy.
           </p>
         </div>
 

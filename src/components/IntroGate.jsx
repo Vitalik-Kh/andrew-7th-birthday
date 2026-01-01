@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const IntroGate = ({ onComplete }) => {
@@ -13,19 +13,25 @@ const IntroGate = ({ onComplete }) => {
   const cols = isMobile ? 12 : 30;
   const rows = isMobile ? 35 : 28;
   const totalBricks = cols * rows;
-  const bricks = Array.from({ length: totalBricks }, (_, i) => ({
-    id: i,
-    col: i % cols,
-    row: Math.floor(i / cols),
-    // Random Lego colors - slightly dulled
-    color: [
-      "#A52818", // slightly dulled brick-red
-      "#D4AF37", // slightly dulled brick-yellow
-      "#1E5A8E", // slightly dulled brick-blue
-      "#2A6B35", // slightly dulled brick-green
-      "#D94F1E", // slightly dulled magma-orange
-    ][Math.floor(Math.random() * 5)],
-  }));
+
+  // Memoize bricks to prevent color changes on re-render
+  const bricks = useMemo(
+    () =>
+      Array.from({ length: totalBricks }, (_, i) => ({
+        id: i,
+        col: i % cols,
+        row: Math.floor(i / cols),
+        // Random Lego colors - slightly dulled
+        color: [
+          "#A52818", // slightly dulled brick-red
+          "#D4AF37", // slightly dulled brick-yellow
+          "#1E5A8E", // slightly dulled brick-blue
+          "#2A6B35", // slightly dulled brick-green
+          "#D94F1E", // slightly dulled magma-orange
+        ][Math.floor(Math.random() * 5)],
+      })),
+    [totalBricks, cols]
+  );
 
   const handleClick = () => {
     if (clicks >= 9) {
@@ -37,11 +43,11 @@ const IntroGate = ({ onComplete }) => {
       return;
     }
 
-    // Each click destroys 10-15% of remaining bricks
+    // Each click destroys 18-20% of remaining bricks
     const remainingBricks = bricks.filter(
       (b) => !destroyedBricks.includes(b.id)
     );
-    const bricksToDestroy = Math.ceil(remainingBricks.length * 0.12);
+    const bricksToDestroy = Math.ceil(remainingBricks.length * 0.19);
 
     // Randomly select bricks to destroy
     const newDestroyedBricks = [];
@@ -173,13 +179,13 @@ const IntroGate = ({ onComplete }) => {
                   }}
                 />
 
-                {/* Progress fill with green gradient - less transparent */}
+                {/* Progress fill with green gradient - fades to transparent at right edge */}
                 <div
                   className="absolute inset-0 transition-all duration-500"
                   style={{
                     width: `${clicks * 10}%`,
                     background:
-                      "linear-gradient(to right, rgba(22, 163, 74, 0.85), rgba(34, 197, 94, 0.8), rgba(74, 222, 128, 0.75))",
+                      "linear-gradient(to right, rgb(34, 197, 94) calc(100% - 60px), transparent 100%)",
                     boxShadow:
                       "inset 0 2px 8px rgba(255,255,255,0.2), 0 0 20px rgba(34, 197, 94, 0.5)",
                   }}
