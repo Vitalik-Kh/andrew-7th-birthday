@@ -36,7 +36,7 @@ const IntroGate = ({ onComplete }) => {
 
   const handleClick = () => {
     if (clicks >= 9) {
-      // 10th click - destroy ALL remaining bricks and hide text immediately
+      // 10th click - destroy ALL remaining bricks
       const remainingBricks = bricks.filter(
         (b) => !destroyedBricks.includes(b.id)
       );
@@ -45,15 +45,19 @@ const IntroGate = ({ onComplete }) => {
         ...remainingBricks.map((b) => b.id),
       ]);
       setClicks(10);
-      setHideText(true);
 
-      // Wait for the brick destruction animation, then show white flash
+      // Wait for progress bar to complete (500ms), then hide text
       setTimeout(() => {
-        setShowWhiteFlash(true);
+        setHideText(true);
+
+        // Wait a bit for text fade out, then show white flash
         setTimeout(() => {
-          onComplete();
-        }, 1000);
-      }, 800);
+          setShowWhiteFlash(true);
+          setTimeout(() => {
+            onComplete();
+          }, 1000);
+        }, 300);
+      }, 500);
       return;
     }
 
