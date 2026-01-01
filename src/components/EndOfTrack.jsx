@@ -44,7 +44,7 @@ const EndOfTrack = () => {
           </p>
           <a
             href="tel:074 81 763 951"
-            className="block text-center text-white hover:text-brick-yellow text-2xl font-heading transition-colors"
+            className="block text-center text-white hover:text-brick-yellow text-2xl font-body font-semibold transition-colors tracking-wider"
             style={{
               textShadow: "2px 2px 0 rgba(0, 0, 0, 0.8)",
             }}
