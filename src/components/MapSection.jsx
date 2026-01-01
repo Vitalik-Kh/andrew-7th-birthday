@@ -53,14 +53,15 @@ const MapSection = () => {
         {/* Date & Time */}
         <div className="text-center mb-8">
           <div className="inline-block bg-green-600/90 text-white px-8 py-6 rounded-2xl mb-4 border-2 border-green-400 shadow-lg">
-            <p
-              className="font-heading text-2xl md:text-3xl"
+            <div
+              className="font-heading text-2xl md:text-3xl flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2"
               style={{
                 textShadow: "2px 2px 0 rgba(0, 0, 0, 0.5)",
               }}
             >
-              {PARTY_CONFIG.date}
-            </p>
+              <span>Tuesday, January 20</span>
+              <span>at 4:30 PM</span>
+            </div>
           </div>
         </div>
 

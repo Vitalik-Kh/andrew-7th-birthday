@@ -108,11 +108,12 @@ const MainTrack = () => {
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.6 }}
           >
-            <p className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-              🏁{" "}
-              <span className="font-bold">Tuesday, January 20 at 4:30 PM</span>{" "}
-              🏁
-            </p>
+            <div className="drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)] flex flex-col md:flex-row items-center justify-center gap-1 md:gap-2">
+              <span>🏁</span>
+              <span className="font-bold">Tuesday, January 20</span>
+              <span className="font-bold">at 4:30 PM</span>
+              <span>🏁</span>
+            </div>
           </motion.div>
         </motion.div>
 
@@ -184,7 +185,7 @@ const MainTrack = () => {
         {/* Scrolling Car - behind checkpoints, centered on road */}
         {showCar && (
           <motion.div
-            className="fixed pointer-events-none flex items-center justify-center"
+            className="fixed pointer-events-none"
             style={{
               left: "50%",
               top: "20vh",
@@ -203,6 +204,7 @@ const MainTrack = () => {
               style={{
                 filter:
                   "drop-shadow(0 4px 12px rgba(0,0,0,0.9)) drop-shadow(0 0 8px rgba(34, 197, 94, 0.6))",
+                marginLeft: "-3px",
               }}
               animate={{
                 filter: [
