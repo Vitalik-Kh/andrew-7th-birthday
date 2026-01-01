@@ -288,7 +288,7 @@ const RsvpForm = () => {
                 }}
               >
                 {formData.attending === "Yes"
-                  ? "See you at the party!"
+                  ? "One last checkpoint left!"
                   : "We'll miss you at the party!"}
               </p>
               <div className="text-6xl">
