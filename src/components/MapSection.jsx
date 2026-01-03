@@ -59,7 +59,7 @@ const MapSection = () => {
                 textShadow: "2px 2px 0 rgba(0, 0, 0, 0.5)",
               }}
             >
-              <span>Tuesday, January 20</span>
+              <span>Tuesday, Jan 20</span>
               <span>at 4:30 PM</span>
             </div>
           </div>

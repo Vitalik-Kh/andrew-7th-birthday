@@ -6,7 +6,7 @@ const RsvpForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     attending: "",
-    dietary: "",
+    notes: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
@@ -27,7 +27,7 @@ const RsvpForm = () => {
       formPayload.append("access_key", PARTY_CONFIG.web3FormsKey);
       formPayload.append("name", formData.name);
       formPayload.append("attending", formData.attending);
-      formPayload.append("dietary", formData.dietary || "None");
+      formPayload.append("notes", formData.notes || "None");
       formPayload.append(
         "subject",
         `RSVP for Andrew's 7th Birthday - ${formData.name}`
@@ -124,7 +124,7 @@ const RsvpForm = () => {
                     textShadow: "1px 1px 0 rgba(0, 0, 0, 0.8)",
                   }}
                 >
-                  Your Name *
+                  Your name *
                 </label>
                 <input
                   type="text"
@@ -215,25 +215,25 @@ const RsvpForm = () => {
                 </div>
               </div>
 
-              {/* Dietary Restrictions */}
+              {/* Notes */}
               <div>
                 <label
-                  htmlFor="dietary"
+                  htmlFor="notes"
                   className="block text-lg font-body text-white mb-2 font-semibold"
                   style={{
                     textShadow: "1px 1px 0 rgba(0, 0, 0, 0.8)",
                   }}
                 >
-                  Dietary Requirements / Allergies
+                  Leave a message (optional)
                 </label>
                 <textarea
-                  id="dietary"
-                  name="dietary"
-                  value={formData.dietary}
+                  id="notes"
+                  name="notes"
+                  value={formData.notes}
                   onChange={handleChange}
                   rows="3"
                   className="w-full px-4 py-3 rounded-xl bg-white/10 backdrop-blur-sm border-2 border-brick-red/50 focus:border-brick-red text-white outline-none transition-colors resize-none font-semibold"
-                  placeholder="Let us know if you have any dietary needs..."
+                  placeholder="Your message here..."
                 />
               </div>
 
