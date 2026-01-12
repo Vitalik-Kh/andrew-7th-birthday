@@ -215,27 +215,30 @@ const RsvpForm = () => {
                 </div>
               </div>
 
-              {/* Notes */}
-              <div>
-                <label
-                  htmlFor="notes"
-                  className="block text-lg font-body text-white mb-2 font-semibold"
-                  style={{
-                    textShadow: "1px 1px 0 rgba(0, 0, 0, 0.8)",
-                  }}
-                >
-                  Leave a message (optional)
-                </label>
-                <textarea
-                  id="notes"
-                  name="notes"
-                  value={formData.notes}
-                  onChange={handleChange}
-                  rows="3"
-                  className="w-full px-4 py-3 rounded-xl bg-white/10 backdrop-blur-sm border-2 border-brick-red/50 focus:border-brick-red text-white outline-none transition-colors resize-none font-semibold"
-                  placeholder="Your message here..."
-                />
-              </div>
+              {/* Notes - Only show when attending */}
+              {formData.attending === "Yes" && (
+                <div>
+                  <label
+                    htmlFor="notes"
+                    className="block text-lg font-body text-white mb-2 font-semibold"
+                    style={{
+                      textShadow: "1px 1px 0 rgba(0, 0, 0, 0.8)",
+                    }}
+                  >
+                    Dietary Requirements / Allergy Information *
+                  </label>
+                  <textarea
+                    id="notes"
+                    name="notes"
+                    value={formData.notes}
+                    onChange={handleChange}
+                    rows="3"
+                    required
+                    className="w-full px-4 py-3 rounded-xl bg-white/10 backdrop-blur-sm border-2 border-brick-red/50 focus:border-brick-red text-white outline-none transition-colors resize-none font-semibold"
+                    placeholder="Please list any dietary requirements or allergies..."
+                  />
+                </div>
+              )}
 
               {/* Submit Button */}
               <motion.button

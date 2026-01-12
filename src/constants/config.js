@@ -17,6 +17,6 @@ export const PARTY_CONFIG = {
 };
 
 export const GEAR_CHECKLIST = [
-  "Comfortable clothes",
+  "Comfortable clothes and trainers",
   "Big smiles and party spirit!",
 ];
