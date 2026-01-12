@@ -6,6 +6,7 @@ const RsvpForm = () => {
   const [formData, setFormData] = useState({
     name: "",
     attending: "",
+    phone: "",
     notes: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -27,6 +28,7 @@ const RsvpForm = () => {
       formPayload.append("access_key", PARTY_CONFIG.web3FormsKey);
       formPayload.append("name", formData.name);
       formPayload.append("attending", formData.attending);
+      formPayload.append("phone", formData.phone || "N/A");
       formPayload.append("notes", formData.notes || "None");
       formPayload.append(
         "subject",
@@ -215,29 +217,54 @@ const RsvpForm = () => {
                 </div>
               </div>
 
-              {/* Notes - Only show when attending */}
+              {/* Phone and Notes - Only show when attending */}
               {formData.attending === "Yes" && (
-                <div>
-                  <label
-                    htmlFor="notes"
-                    className="block text-lg font-body text-white mb-2 font-semibold"
-                    style={{
-                      textShadow: "1px 1px 0 rgba(0, 0, 0, 0.8)",
-                    }}
-                  >
-                    Dietary Requirements / Allergy Information *
-                  </label>
-                  <textarea
-                    id="notes"
-                    name="notes"
-                    value={formData.notes}
-                    onChange={handleChange}
-                    rows="3"
-                    required
-                    className="w-full px-4 py-3 rounded-xl bg-white/10 backdrop-blur-sm border-2 border-brick-red/50 focus:border-brick-red text-white outline-none transition-colors resize-none font-semibold"
-                    placeholder="Please list any dietary requirements or allergies..."
-                  />
-                </div>
+                <>
+                  {/* Phone Number */}
+                  <div>
+                    <label
+                      htmlFor="phone"
+                      className="block text-lg font-body text-white mb-2 font-semibold"
+                      style={{
+                        textShadow: "1px 1px 0 rgba(0, 0, 0, 0.8)",
+                      }}
+                    >
+                      Phone number *
+                    </label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                      className="w-full px-4 py-3 rounded-xl bg-white/10 backdrop-blur-sm border-2 border-brick-red/50 focus:border-brick-red text-white outline-none transition-colors font-semibold"
+                      placeholder="Your phone number"
+                    />
+                  </div>
+
+                  {/* Dietary Requirements */}
+                  <div>
+                    <label
+                      htmlFor="notes"
+                      className="block text-lg font-body text-white mb-2 font-semibold"
+                      style={{
+                        textShadow: "1px 1px 0 rgba(0, 0, 0, 0.8)",
+                      }}
+                    >
+                      Dietary requirements / allergy information (optional)
+                    </label>
+                    <textarea
+                      id="notes"
+                      name="notes"
+                      value={formData.notes}
+                      onChange={handleChange}
+                      rows="3"
+                      className="w-full px-4 py-3 rounded-xl bg-white/10 backdrop-blur-sm border-2 border-brick-red/50 focus:border-brick-red text-white outline-none transition-colors resize-none font-semibold"
+                      placeholder="Please list any dietary requirements or allergies"
+                    />
+                  </div>
+                </>
               )}
 
               {/* Submit Button */}
